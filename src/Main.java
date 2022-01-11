@@ -22,7 +22,7 @@ public class Main {
             // display user hands
             this.userHand.showHand();
 
-            boolean userGoesFirst = false;
+            boolean userGoes = false;
             System.out.println("Let's flip a coin to decide who goes first. Heads or Tails? (H/T)");
             String coinFlip = scan.nextLine();
             Random rand = new Random();
@@ -31,7 +31,7 @@ public class Main {
             System.out.println("coinflip: " + coinFlip);
             // Heads = 1, Tails = 0
             if ((coinFlip.equals("T") && coin == 0) || (coinFlip.equals("H") && coin == 1)) {
-                userGoesFirst = true;
+                userGoes = true;
                 System.out.println("You go first");
             }
             else {
@@ -45,15 +45,15 @@ public class Main {
                 System.out.println("Current Top Card");
                 System.out.println("----------------");
                 top.showCard();
-                if (userGoesFirst) {
+                if (userGoes) {
                     UserTurn userTurn = new UserTurn(top, this.userHand, this.deck);
                     top = userTurn.actualTurn();
-                    userGoesFirst = !userGoesFirst;
+                    userGoes = !userGoes;
                 }
-                if (!userGoesFirst) {
+                if (!userGoes) {
                     CompTurn compTurn = new CompTurn(top, this.compHand, this.deck);
                     top = compTurn.actualTurn();
-                    userGoesFirst = !userGoesFirst;
+                    userGoes = !userGoes;
                 }
                 if (compHand.size() == 0) {
                     System.out.println("You lost");
